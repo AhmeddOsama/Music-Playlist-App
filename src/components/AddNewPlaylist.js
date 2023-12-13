@@ -6,7 +6,7 @@ import { addNewPlaylist, getPlaylists } from '../redux/slices/playlistsSlice';
 const AddNewPlaylist = ({ open, onClose }) => {
     const [playlistName, setPlaylistName] = useState('');
     const [inValid, setinValid] = useState(true);
-
+    const [errorMessage, setErrorMessage] = useState('Playlist Name cannot be empty!')
     const playlists = useSelector(getPlaylists)
     const dispatch = useDispatch()
     const handleInputChange = (event) => {
@@ -14,7 +14,18 @@ const AddNewPlaylist = ({ open, onClose }) => {
         isValiidName(event.target.value)
     };
     const isValiidName = (name) => {
-        setinValid(playlists.some((playlist) => playlist.name === name))
+        if (name == '') {
+            setinValid(true)
+            setErrorMessage('Playlist Name cannot be empty!')
+        }
+        else if (playlists.some((playlist) => playlist.name === name)) {
+            setinValid(true)
+            setErrorMessage('Playlist Name Already Exists')
+        }
+        else {
+            setinValid(false)
+            setErrorMessage('')
+        }
     }
     const handleSubmit = () => {
         dispatch(addNewPlaylist(playlistName))
@@ -41,6 +52,7 @@ const AddNewPlaylist = ({ open, onClose }) => {
                     value={playlistName}
                     onChange={handleInputChange}
                     error={inValid}
+                    helperText={errorMessage}
                 />
             </DialogContent>
             <DialogActions>
