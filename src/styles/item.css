@@ -1,0 +1,12 @@
+/* styles.css */
+
+.item {
+    padding: 16px;
+    margin-bottom: 16px;
+    background: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.item:hover {
+    background: #444444;
+}

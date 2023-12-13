@@ -3,6 +3,7 @@ import React from 'react';
 import SongDetails from './SongDetails';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import SearchBar from './SearchBar';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const SongList = ({ songs }) => {
 
@@ -19,7 +20,7 @@ const SongList = ({ songs }) => {
                     <Typography style={{ color: 'gray' }} variant="subtitle1">Album:</Typography>
                 </Grid>
                 <Grid item xs={2}>
-                    <Typography style={{ color: 'gray' }} variant="subtitle1">Duration:</Typography>
+                    <AccessTimeIcon style={{ color: 'gray' }}></AccessTimeIcon>
                 </Grid>
             </Grid>
         </Paper>

@@ -5,7 +5,8 @@ import SearchIcon from '@mui/icons-material/Search';
 const SearchBar = ({ setSearchTerm }) => {
     const [text, setText] = useState('');
 
-    const handleSearch = () => {
+    const handleSearch = (text) => {
+        setText(text)
         setSearchTerm(text);
     };
 
@@ -17,7 +18,7 @@ const SearchBar = ({ setSearchTerm }) => {
                     variant="filled"
                     label="Search for a song"
                     value={text}
-                    onChange={(e) => setText(e.target.value)}
+                    onChange={(e) => handleSearch(e.target.value)}
                     InputProps={{
                         style: {
                             color: 'white',

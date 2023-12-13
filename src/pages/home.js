@@ -21,10 +21,8 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        console.log('search term ', searchTerm)
         if (accessToken != undefined) {
-            handleSearch();
-
+            onNewSearch();
         }
     }, [searchTerm, accessToken]);
 
@@ -46,11 +44,10 @@ function Home() {
             setLoading(false);
         }
     };
-
-    const handleSearch = async () => {
+    const fetchSongs = async () => {
         try {
             var response
-            if (searchTerm == '') {
+            if (searchTerm == "") {
                 response = await fetch(`https://api.spotify.com/v1/browse/new-releases?offset=${offset}&limit=20`, {
                     headers: {
                         'Authorization': 'Bearer ' + accessToken
@@ -66,22 +63,45 @@ function Home() {
                 })
 
             }
-            const data = await response.json();
+            return await response.json();
+
+        } catch (error) {
+            console.error('Error fetching tracks ', error);
+        }
+    }
+    const onNewSearch = async () => {
+        try {
+            const data = await fetchSongs()
+            if (data.tracks.items) {
+                setSongs([...data.tracks.items]);
+                setOffset(offset + 20);
+            }
+        }
+
+        catch (error) {
+            console.error('Error fetching tracks ', error);
+
+        }
+    }
+    const fetchMore = async () => {
+        try {
+            const data = await fetchSongs()
             if (data.tracks.items) {
                 setSongs([...songs, ...data.tracks.items]);
                 setOffset(offset + 20);
             }
-        } catch (error) {
-            console.error('Error fetching tracks ', error);
         }
-    };
+        catch (error) {
+            console.error('Error fetching more tracks ', error);
+        }
+    }
 
     return (
         <div>
-            <SearchBar setSearchTerm={setSearchTerm} onSearch={handleSearch} />
+            <SearchBar setSearchTerm={setSearchTerm} />
             <InfiniteScroll
                 dataLength={songs.length}
-                next={handleSearch}
+                next={fetchMore}
                 hasMore={true}
                 loader={loading ? <LinearProgress /> : null}
             >

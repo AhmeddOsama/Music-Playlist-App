@@ -13,7 +13,7 @@ const SimpleAppBar = () => {
         dispatch(setSelectedSong({}))
     }
     return (
-        <AppBar position="static" style={{ background: 'linear-gradient(to bottom, #000000, #333333)' }}>
+        <AppBar position="static" style={{ background: 'black' }}>
             <Toolbar>
                 <Box display="flex" justifyContent="center" width="100%">
 
