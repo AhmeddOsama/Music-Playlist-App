@@ -35,16 +35,7 @@ const SearchBar = ({ setSearchTerm }) => {
                     }}
                 />
             </Grid>
-            <Grid item xs={4}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ backgroundColor: 'black', color: 'white' }} onClick={handleSearch}
-                    startIcon={<SearchIcon />}
-                >
-                    Search
-                </Button>
-            </Grid>
+
         </Grid>
     );
 };
