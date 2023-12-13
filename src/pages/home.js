@@ -4,12 +4,14 @@ import { NavLink } from 'react-router-dom';
 import { Grid, Paper, Typography, Button } from '@material-ui/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import SongList from '../components/SongList';
+import { CircularProgress, LinearProgress } from '@mui/material';
 
 function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const [songs, setSongs] = useState([]);
     const [accessToken, setAccessToken] = useState();
     const [offset, setOffset] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const clientId = 'cb38abd46aae40c7b4e866b90628e9bf';
     const clientSecret = '9a894c1772b94a038965643a18473a56';
@@ -28,6 +30,7 @@ function Home() {
 
     const fetchAccessToken = async () => {
         try {
+            setLoading(true);
             const response = await fetch('https://accounts.spotify.com/api/token', {
                 method: 'POST',
                 headers: {
@@ -37,8 +40,10 @@ function Home() {
             });
             const data = await response.json();
             setAccessToken(data.access_token);
+            setLoading(false);
         } catch (error) {
             console.error('Error fetching access token: ', error);
+            setLoading(false);
         }
     };
 
@@ -78,7 +83,7 @@ function Home() {
                 dataLength={songs.length}
                 next={handleSearch}
                 hasMore={true}
-                loader={<h4>Loading...</h4>}
+                loader={loading ? <LinearProgress /> : null}
             >
                 <SongList songs={songs} />
             </InfiniteScroll>
