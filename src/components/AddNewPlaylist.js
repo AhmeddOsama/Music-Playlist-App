@@ -30,6 +30,7 @@ const AddNewPlaylist = ({ open, onClose }) => {
     const handleSubmit = () => {
         dispatch(addNewPlaylist(playlistName))
         setPlaylistName('')
+        setErrorMessage('Playlist Name cannot be empty!')
         setinValid(true)
         onClose();
     };

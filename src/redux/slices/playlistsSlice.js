@@ -58,4 +58,5 @@ const playlistsSlice = createSlice({
 export const { setSelectedPlaylist, getAllPlaylists, addNewPlaylist, deletePlaylist, removeSongFromPlaylist, addSongToPlaylist, setSelectedSong } = playlistsSlice.actions;
 export const getPlaylists = (state) => state.playlists.playlists;
 export const getSelectedPlaylist = (state) => state.playlists.selectedPlaylist;
+export const getSelectedSong = (state) => state.playlists.selectedSong
 export default playlistsSlice.reducer;
