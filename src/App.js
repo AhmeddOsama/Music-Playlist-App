@@ -13,11 +13,12 @@ function App() {
     <BrowserRouter>
       <SimpleAppBar>
       </SimpleAppBar>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/playlists" element={<PlaylistsScreen />}></Route>
-      </Routes>
+      <div style={{ backgroundColor: 'black', minHeight: '100vh' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/playlists" element={<PlaylistsScreen />}></Route>
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

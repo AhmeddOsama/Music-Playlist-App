@@ -18,6 +18,20 @@ const SearchBar = ({ setSearchTerm }) => {
                     label="Search for a song"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
+                    InputProps={{
+                        style: {
+                            color: 'white',
+                            borderColor: 'white',
+                            backgroundColor: '#333',
+                            borderRadius: 20,
+
+                        },
+                    }}
+                    InputLabelProps={{
+                        style: {
+                            color: 'white',
+                        },
+                    }}
                 />
             </Grid>
             <Grid item xs={4}>
