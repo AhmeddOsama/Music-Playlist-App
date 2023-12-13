@@ -10,7 +10,7 @@ const SearchBar = ({ setSearchTerm }) => {
     };
 
     return (
-        <Grid style={{ marginLeft: 35, padding: 10 }} container spacing={2} alignItems="center">
+        <Grid style={{ padding: 10 }} container spacing={2} alignItems="center">
             <Grid item xs={8}>
                 <TextField
                     fullWidth

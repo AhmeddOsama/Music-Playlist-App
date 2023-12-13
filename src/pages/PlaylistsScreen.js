@@ -53,7 +53,7 @@ const PlaylistsScreen = () => {
         ))
         }
         {!selectedPlaylist.songs && (
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Fab onClick={toggleAddPlaylist} color="secondary" aria-label="add">
                     <AddIcon />
                 </Fab>
