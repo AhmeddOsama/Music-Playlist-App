@@ -1,18 +1,36 @@
-// SearchBar.js
 import React, { useState } from 'react';
+import { TextField, Button, Grid } from '@material-ui/core';
+import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar = ({ setSearchTerm }) => {
-    const [text, setText] = useState('')
+    const [text, setText] = useState('');
+
+    const handleSearch = () => {
+        setSearchTerm(text);
+    };
+
     return (
-        <div>
-            <input
-                type="text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Search for a song..."
-            />
-            <button onClick={() => setSearchTerm(text)}>Search</button>
-        </div>
+        <Grid style={{ marginLeft: 35, padding: 10 }} container spacing={2} alignItems="center">
+            <Grid item xs={8}>
+                <TextField
+                    fullWidth
+                    variant="filled"
+                    label="Search for a song"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                />
+            </Grid>
+            <Grid item xs={4}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    style={{ backgroundColor: 'black', color: 'white' }} onClick={handleSearch}
+                    startIcon={<SearchIcon />}
+                >
+                    Search
+                </Button>
+            </Grid>
+        </Grid>
     );
 };
 

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from '../components/SearchBar';
+import { NavLink } from 'react-router-dom';
+import { Grid, Paper, Typography, Button } from '@material-ui/core';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import SongList from '../components/SongList';
 
 function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const [songs, setSongs] = useState([]);
     const [accessToken, setAccessToken] = useState();
+    const [offset, setOffset] = useState(0);
 
     const clientId = 'cb38abd46aae40c7b4e866b90628e9bf';
     const clientSecret = '9a894c1772b94a038965643a18473a56';
@@ -42,7 +46,7 @@ function Home() {
         try {
             var response
             if (searchTerm == '') {
-                response = await fetch('https://api.spotify.com/v1/browse/new-releases', {
+                response = await fetch(`https://api.spotify.com/v1/browse/new-releases?offset=${offset}&limit=20`, {
                     headers: {
                         'Authorization': 'Bearer ' + accessToken
                     }
@@ -50,7 +54,7 @@ function Home() {
             }
             else {
 
-                response = await fetch(`https://api.spotify.com/v1/search?q=${searchTerm}&type=track`, {
+                response = await fetch(`https://api.spotify.com/v1/search?q=${searchTerm}&type=track&offset=${offset}&limit=20`, {
                     headers: {
                         'Authorization': 'Bearer ' + accessToken
                     }
@@ -58,9 +62,9 @@ function Home() {
 
             }
             const data = await response.json();
-            console.log('data ', data.tracks.items)
             if (data.tracks.items) {
-                setSongs(data.tracks.items);
+                setSongs([...songs, ...data.tracks.items]);
+                setOffset(offset + 20);
             }
         } catch (error) {
             console.error('Error fetching tracks ', error);
@@ -70,7 +74,14 @@ function Home() {
     return (
         <div>
             <SearchBar setSearchTerm={setSearchTerm} onSearch={handleSearch} />
-            <SongList songs={songs} />
+            <InfiniteScroll
+                dataLength={songs.length}
+                next={handleSearch}
+                hasMore={true}
+                loader={<h4>Loading...</h4>}
+            >
+                <SongList songs={songs} />
+            </InfiniteScroll>
         </div>
     );
 }
