@@ -5,20 +5,21 @@ import { addNewPlaylist, getPlaylists } from '../redux/slices/playlistsSlice';
 
 const AddNewPlaylist = ({ open, onClose }) => {
     const [playlistName, setPlaylistName] = useState('');
-    const [valid, setValid] = useState(true);
+    const [inValid, setinValid] = useState(true);
 
     const playlists = useSelector(getPlaylists)
     const dispatch = useDispatch()
     const handleInputChange = (event) => {
         setPlaylistName(event.target.value);
         isValiidName(event.target.value)
-};
+    };
     const isValiidName = (name) => {
-        setValid(playlists.some((playlist) => playlist.name === name))
+        setinValid(playlists.some((playlist) => playlist.name === name))
     }
     const handleSubmit = () => {
         dispatch(addNewPlaylist(playlistName))
         setPlaylistName('')
+        setinValid(true)
         onClose();
     };
 
@@ -39,12 +40,12 @@ const AddNewPlaylist = ({ open, onClose }) => {
                     variant="standard"
                     value={playlistName}
                     onChange={handleInputChange}
-                    error={valid}
+                    error={inValid}
                 />
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Cancel</Button>
-                <Button onClick={handleSubmit}>Create Playlist</Button>
+                <Button disabled={inValid} onClick={handleSubmit}>Create Playlist</Button>
             </DialogActions>
         </Dialog>
     );

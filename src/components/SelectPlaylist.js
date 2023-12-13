@@ -6,6 +6,8 @@ import { Dialog, DialogTitle, List, Fab, Modal, Card, Box, Button, ListItem, Lis
 import { getPlaylists, addSongToPlaylist } from '../redux/slices/playlistsSlice';
 import { ListItemButton } from '@mui/material';
 import AddNewPlaylist from './AddNewPlaylist';
+import AddIcon from '@mui/icons-material/Add';
+
 function SelectPlaylist(props) {
     const { onClose, selectedValue, open } = props;
     const playlists = useSelector(getPlaylists)
@@ -15,11 +17,6 @@ function SelectPlaylist(props) {
         setAddPlaylistDialogOpen(!addPlaylistDialogOpen);
     };
 
-
-
-    useEffect(() => {
-        console.log('Playlists', playlists)
-    }, [])
     const handleClose = () => {
         onClose(selectedValue);
     };
@@ -42,16 +39,19 @@ function SelectPlaylist(props) {
                         </ListItemButton>
                     </ListItem>
                 ))}
-                <ListItem disableGutters>
+                <ListItem disableGutters style={{ textAlign: 'center' }}>
                     <ListItemButton
                         autoFocus
                         onClick={toggleAddPlaylist}
 
                     >
                         <ListItemAvatar>
-                            <Fab>+</Fab>
+                            <Avatar>
+                                <AddIcon />
+                            </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary="Add playlist" />
+
                     </ListItemButton>
                 </ListItem>
                 <AddNewPlaylist

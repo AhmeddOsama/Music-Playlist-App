@@ -47,12 +47,12 @@ const SongDetails = ({ song }) => {
                     <Typography style={{ color: 'white' }} >{minutes}:{seconds.padStart(2, '0')}</Typography>
                 </Grid>
                 <Grid item xs={2}>
-                    <Fab onClick={onAddToPlaylist} size="small" color="primary" aria-label="add">
+                    <Fab onClick={onAddToPlaylist} size="small" color="secondary" aria-label="add">
                         +
                     </Fab>
                 </Grid>
                 {selectedPlaylist.name != undefined && (<Grid item xs={2}>
-                    <Fab onClick={onRemoveFromPlaylist} size="small" color="primary" aria-label="remove">
+                    <Fab onClick={onRemoveFromPlaylist} size="small" color="secondary" aria-label="remove">
                         -
                     </Fab>
                 </Grid>)}
