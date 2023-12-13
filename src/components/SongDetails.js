@@ -6,6 +6,7 @@ import { getSelectedPlaylist, setSelectedSong } from '../redux/slices/playlistsS
 import { Dialog, DialogActions, DialogContent, DialogTitle, ListItem } from '@mui/material';
 import RemoveFromPlaylist from './RemoveFromPlaylist';
 import AddIcon from '@mui/icons-material/Add';
+import { useLocation } from 'react-router-dom';
 const SongDetails = ({ song }) => {
     const trackDurationInMs = song.duration_ms;
     const minutes = Math.floor(trackDurationInMs / 60000);
@@ -14,6 +15,9 @@ const SongDetails = ({ song }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [removeFromPlaylist, setRemoveFromPlaylist] = useState(false)
     const dispatch = useDispatch()
+    const location = useLocation();
+    const currentUrl = location.pathname;
+
     const toggleRemoveFromPlaylist = () => {
         setRemoveFromPlaylist(!removeFromPlaylist)
     }
@@ -51,7 +55,7 @@ const SongDetails = ({ song }) => {
                         <AddIcon style={{ color: 'white' }} ></AddIcon>
                     </Fab>
                 </Grid>
-                {selectedPlaylist.name != undefined && (<Grid item xs={2}>
+                {currentUrl === `/playlists/${selectedPlaylist.name}` && (<Grid item xs={2}>
                     <Fab onClick={onRemoveFromPlaylist} size="small" style={{ backgroundColor: 'white' }} aria-label="remove">
                         -
                     </Fab>
