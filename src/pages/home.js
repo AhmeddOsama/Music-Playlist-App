@@ -97,7 +97,7 @@ function Home() {
     }
 
     return (
-        <div>
+        <div >
             <SearchBar setSearchTerm={setSearchTerm} />
             <InfiniteScroll
                 dataLength={songs.length}

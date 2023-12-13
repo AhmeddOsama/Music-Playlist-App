@@ -13,9 +13,9 @@ const SimpleAppBar = () => {
         dispatch(setSelectedSong({}))
     }
     return (
-        <AppBar position="static" style={{ background: 'black' }}>
+        <AppBar position="fixed" style={{ background: 'black', top: 0, zIndex: 1000, width: '100%', marginBottom: '64px' }}>
             <Toolbar>
-                <Box display="flex" justifyContent="center" width="100%">
+                <Box display="flex" justifyContent="center" width="100%" flex={1}>
 
                     <Button
                         variant="contained"

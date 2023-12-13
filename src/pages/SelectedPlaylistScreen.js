@@ -16,17 +16,11 @@ const SelectedPlaylistScreen = () => {
         setImage(file);
     };
 
-    useEffect(() => {
-        console.log('hi');
-    }, [selectedPlaylist]);
 
-    if (!selectedPlaylist || !selectedPlaylist.songs || selectedPlaylist.songs.length === 0) {
-        return null;
-    }
 
     return (
         <div style={{ padding: 10 }}>
-            {selectedPlaylist && (<>
+            {selectedPlaylist.name != undefined && (<>
                 <Grid container spacing={2} alignItems="center">
                     <Grid item>
                         <Input

@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <SimpleAppBar>
       </SimpleAppBar>
-      <div style={{ background: 'linear-gradient(to bottom, #000000, #333333)', minHeight: '100vh' }}>
+      <div style={{ paddingTop: 80, background: 'linear-gradient(to bottom, #000000, #333333)', minHeight: '100vh' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/playlists" element={<PlaylistsScreen />}></Route>
